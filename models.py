@@ -1,6 +1,8 @@
 import re
+
 class User:
-    def __init__(self, name, age, city, phone, email, login, password):
+    def __init__(self, name, age, city, phone, email, login, password, user_id=None, photo_base64=None):
+        self.id = user_id if user_id else None  # ID будет присваиваться при регистрации
         self.name = name
         self.age = age
         self.city = city
@@ -8,16 +10,19 @@ class User:
         self.email = email
         self.login = login
         self.password = password
+        self.photo_base64 = photo_base64
 
     def to_dict(self):
         return {
+            "id": self.id,
             "имя": self.name,
             "возраст": self.age,
             "город": self.city,
             "телефон": self.phone,
             "почта": self.email,
             "логин": self.login,
-            "пароль": self.password
+            "пароль": self.password,
+            "фото": self.photo_base64
         }
 
     @staticmethod
@@ -29,7 +34,9 @@ class User:
             phone=data.get("телефон", ""),
             email=data.get("почта", ""),
             login=data.get("логин", ""),
-            password=data.get("пароль", "")
+            password=data.get("пароль", ""),
+            user_id=data.get("id"),
+            photo_base64=data.get("фото")
         )
     
     def validate(self):

@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 from auth_logic import register_user
 
+
 class RegisterWindow:
     def __init__(self):
         self.root = tk.Tk()
